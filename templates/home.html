@@ -1,0 +1,90 @@
+{% load static %}
+
+{% include 'includes/header.html' %}
+
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <div class="container px-4">
+                <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+                <a class="navbar-brand" href="#page-top">Page Top</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        {% if completed_percentage %}
+                        <li class="nav-item"><a class="nav-link" href="#result">Result</a></li>
+                        {% endif %}
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-primary bg-gradient text-white">
+            <div class="container px-4 text-center">
+                <h1 class="fw-bolder">Welcome to Life Expectancy App</h1>
+                <p class="lead">Here you can check the remaining life for yourself by entering your DOB</p>
+                <p class="lead">Enter you DOB in below input in mm/dd/yyyy format</p>
+                <form class="" action="#result" method="post">
+                  {% csrf_token %}
+                  <label class="lead" for="sel2">DOB:</label>
+                  <input type="text" name="dob" id="sel2" placeholder="Enter your DOB" required>
+
+                    <label class="lead" for="sel1">&nbsp;&nbsp;Country:</label>
+                    <select name="country" id="sel1" required>
+                      {% for place in placeName %}
+                      <option>{{ place }}</option>
+                      {% endfor %}
+                    </select>
+                  <br><br>
+                  {% if message %}
+                      <p class="lead" class="text-danger">{{ message }}</p>
+                  {% endif %}
+                  <input type="submit" class="btn btn-sm btn-light" role="button">
+                </form>
+
+            </div>
+        </header>
+        <!-- About section-->
+        <section id="about">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2>About this page</h2>
+                        <p class="lead">This webpage is build to provide the Life Expectancy of individual based on the Country(Asia) they are living currently:</p>
+                        <ul>
+                            <li>Enter your DOB in mm/dd/yyyy format in the input box</li>
+                            <li>Select your country from the dropdown and submit</li>
+                            <li>Page will navigate you to the result which contains the details of your completed, expected spends and available lifetime.</li>
+                            <li>Result is calculated based on the average life expectancy of the chosen country.</li>
+                            <li>This app is not forecast, it is created for entertain purpose only.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% if completed_percentage %}
+            <section class="bg-light" id="result">
+                <div class="container px-4">
+                    <div class="row gx-4 justify-content-center">
+                        <div class="col-lg-8">
+                            <h2>Result:</h2>
+                            <h4>Below is calculated based on the Life Expectancy({{ life_expectancy }}) years for the people live in {{place}}</h4>
+                            <ul><li><p class="lead">Entered DOB is {{ dob }} and you completed {{ years }} years {% if months > 0 %} {{ months }} months {% endif %} as of today.</p></li>
+                            <li><p class="lead">You have completed {{ completed_percentage }}% of life.</p></li>
+                            <li><p class="lead">If you sleep for 7 hours a day then you'll spend {{ sleep_percantage }}% of your remaining life in sleep.</p></li>
+                            <li><p class="lead">If you work 8 hours a day then you'll spend {{ work_percentage }}% of your remaining life doing work.</p></li>
+                            <li><p class="lead">If you spend 2 hours a day in phone then you'll spend {{ phone_usage_percentage }}% of your remaining life in phone.</p></li>
+                            <li><p class="lead">If you spend 3 hours a day for eating, bath, washroom etc., then you'll spend {{ freshup_percentage }}% of your remaing life in misc.</p></li>
+                            <li><p class="lead">If you travel 1 hour a day then you'll spend {{ travel_percentage }}% of your life travelling.</p></li>
+                            <li><p class="lead">If you spend 1 hour a day with people like friends/collegues etc., then you'll spend {{ spend_with_people_percentage }}% of your life with other people</p></li>
+                            <li><p class="lead"><strong>If you spend your life for above then you'll complete life will be {{ consolidated_spends_percentage }}%</strong></p></li>
+                            <li><p class="lead"><strong>Your remaining life is {{ remaining_life_percentange }}%</strong></p></li></ul>
+                            <h4>Spend it wise. Time once wasted will never come back.</h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+{% include 'includes/footer.html' %}

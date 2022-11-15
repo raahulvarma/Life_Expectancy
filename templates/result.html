@@ -1,0 +1,26 @@
+
+{% extends 'home.html' %}
+<!-- Result section-->
+{% block bodyblock %}
+<section class="bg-light" id="result">
+    <div class="container px-4">
+        <div class="row gx-4 justify-content-center">
+            <div class="col-lg-8">
+                <h2>Result:</h2>
+                <h4>Below is calculated based on the Life Expectancy({{ life_expectancy }}) years for the people live in {{place}}</h4>
+                <ul><li><p class="lead">You have completed {{ completed_percentage }}% of life.</p></li>
+                <li><p class="lead">If you sleep for 7 hours a day then you'll spend {{ sleep_percantage }}% of your remaining life in sleep.</p></li>
+                <li><p class="lead">If you work 8 hours a day then you'll spend {{ work_percentage }}% of your remaining life doing work.</p></li>
+                <li><p class="lead">If you spend 2 hours a day in phone then you'll spend {{ phone_usage_percentage }}% of your remaining life in phone.</p></li>
+                <li><p class="lead">If you spend 3 hours a day for eating, bath, washroom etc., then you'll spend {{ freshup_percentage }}% of your remaing life in misc.</p></li>
+                <li><p class="lead">If you travel 1 hour a day then you'll spend {{ travel_percentage }}% of your life travelling.</p></li>
+                <li><p class="lead">If you spend 1 hour a day with people like friends/collegues etc., then you'll spend {{ spend_with_people_percentage }}% of your life with other people</p></li>
+                <li><p class="lead"><strong>If you spend your life for above then you'll complete life will be {{ consolidated_spends_percentage }}%</strong></p></li>
+                <li><p class="lead"><strong>Your remaining life is {{ remaining_life_percentange }}%</strong></p></li></ul>
+                <h4>Spend it wise. Time once wasted will never come back.</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
