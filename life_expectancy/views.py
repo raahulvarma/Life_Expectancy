@@ -42,6 +42,7 @@ def home(request):
                             'months' : months,
                             'placeName' : placeName,
                             'place' : place,
+                            'life_expectancy' : life_expectancy,
                             'completed_percentage' : completed_percentage,
                             'lifemsg' : 'Hurray! You are living more than 1 life.',
                             }
