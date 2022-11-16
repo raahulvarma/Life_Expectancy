@@ -9,7 +9,7 @@ def home(request):
     placeName = []
     for i in response['LifeExpectancy_Person']['rankAll']['info']:
         placeName.append(i['placeName'])
-
+    placeName.sort()
     if request.method == "POST":
         life_expectancy = 70
         dob = str(request.POST['dob'])
@@ -82,6 +82,7 @@ def home(request):
                                 'placeName' : placeName,
                                 'message' : "Provided Date is in future, please enter past date.",
                             }
+
         except:
             context = {
                         'placeName' : placeName,
