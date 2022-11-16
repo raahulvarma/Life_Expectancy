@@ -25,13 +25,13 @@
             <div class="container px-4 text-center">
                 <h1 class="fw-bolder">Welcome to Life Expectancy App</h1>
                 <p class="lead">Here you can check the remaining life for yourself by entering your DOB</p>
-                <p class="lead">Enter you DOB in below input in mm/dd/yyyy format</p>
-                <form class="" action="#result" method="post">
+                <p class="lead">Enter your DOB in below input in mm/dd/yyyy format</p>
+                <form action="#result" method="post">
                   {% csrf_token %}
                   <label class="lead" for="sel2">DOB:</label>
                   <input class="btn-sm" autofocus type="text" name="dob" id="sel2" placeholder="Enter your DOB" required>
 
-                    <label class="lead" for="sel1">&nbsp;&nbsp;Country:</label>
+                    <label class="lead" for="sel1">Country:</label>
                     <select class="btn-sm" name="country" id="sel1" required>
                       {% for place in placeName %}
                       <option>{{ place }}</option>
@@ -73,6 +73,9 @@
                             <h4>Below is calculated based on the Life Expectancy({{ life_expectancy }}) years for the people live in {{place}}</h4>
                             <ul><li><p class="lead">Entered DOB is {{ dob }} and you completed {{ years }} years {% if months > 0 %} {{ months }} months {% endif %} as of today.</p></li>
                             <li><p class="lead">You have completed {{ completed_percentage }}% of life.</p></li>
+                            {% if lifemsg %}
+                                <h4>{{ lifemsg }}</h4>
+                            {% else %}
                             <li><p class="lead">If you sleep for 7 hours a day then you'll spend {{ sleep_percantage }}% of your remaining life in sleep.</p></li>
                             <li><p class="lead">If you work 8 hours a day then you'll spend {{ work_percentage }}% of your remaining life doing work.</p></li>
                             <li><p class="lead">If you spend 2 hours a day in phone then you'll spend {{ phone_usage_percentage }}% of your remaining life in phone.</p></li>
@@ -82,6 +85,7 @@
                             <li><p class="lead"><strong>If you spend your life for above then you'll complete life will be {{ consolidated_spends_percentage }}%</strong></p></li>
                             <li><p class="lead"><strong>Your remaining life is {{ remaining_life_percentange }}%</strong></p></li></ul>
                             <h4>Spend it wise. Time once wasted will never come back.</h4>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
